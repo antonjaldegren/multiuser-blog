@@ -12,7 +12,7 @@ function Login() {
 	const [user, setUser] = useRecoilState(authState);
 	const navigate = useNavigate();
 
-	useEffect(() => user.token && navigate("/"), []);
+	useEffect(() => user.token && navigate("/"), [user.token, navigate]);
 
 	function handleClick() {
 		async function login() {

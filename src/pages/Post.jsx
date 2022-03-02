@@ -20,7 +20,7 @@ function Post() {
 		}
 
 		getPost();
-	}, []);
+	}, [params.id]);
 
 	if (!post) return <Loader />;
 
@@ -33,6 +33,7 @@ function Post() {
 				<img
 					className={styles.image}
 					src={`https://cme-blog.osuka.dev${post.image.data.attributes.url}`}
+					alt="Post image"
 				/>
 			) : null}
 			<h1 className={styles.title}>{post.title}</h1>

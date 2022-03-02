@@ -21,7 +21,7 @@ function Posts() {
 		}
 
 		getPosts();
-	}, []);
+	}, [setPosts]);
 
 	if (!posts) return <Loader />;
 

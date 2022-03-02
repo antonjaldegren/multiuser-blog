@@ -16,7 +16,7 @@ function NewPost() {
 	const user = useRecoilValue(authState);
 	const navigate = useNavigate();
 
-	useEffect(() => !user.token && navigate("/"), [user]);
+	useEffect(() => !user.token && navigate("/"), [user.token, navigate]);
 
 	useEffect(
 		() =>
