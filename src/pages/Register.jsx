@@ -45,7 +45,7 @@ function Register() {
 
 	function handleSubmit() {
 		async function registerUser() {
-			const res = await axios.post(
+			await axios.post(
 				"https://cme-blog.osuka.dev/api/auth/local/register",
 				{
 					username: usernameInput,

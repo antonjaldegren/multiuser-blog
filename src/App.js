@@ -1,8 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import axios from "axios";
-import contentState from "./recoil/content/atom";
 
 import Home from "./pages/Home";
 import Posts from "./pages/Posts";

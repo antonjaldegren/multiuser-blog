@@ -6,8 +6,6 @@ import axios from "axios";
 import styles from "./Login.module.css";
 import authState from "../recoil/auth/atom";
 
-// Register: https://cme-blog.osuka.dev/api/auth/local/register
-
 function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");

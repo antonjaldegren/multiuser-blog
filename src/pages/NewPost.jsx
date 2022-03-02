@@ -1,28 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useRecoilValue } from "recoil";
+import axios from "axios";
 import authState from "../recoil/auth/atom";
-import check from "../check.svg";
 import styles from "./NewPost.module.css";
 
 function NewPost() {
 	const [titleInput, setTitleInput] = useState("");
 	const [titleIsValid, setTitleIsValid] = useState(false);
-	const [titleHasFocus, setTitleHasFocus] = useState("");
 
 	const [bodyInput, setBodyInput] = useState("");
 	const [bodyIsValid, setBodyIsValid] = useState(false);
-	const [bodyHasFocus, setBodyHasFocus] = useState(false);
 
 	const user = useRecoilValue(authState);
 	const navigate = useNavigate();
 
 	useEffect(() => !user.token && navigate("/"), [user]);
 
-	useEffect(() => {}, [titleInput]);
-	useEffect(() => {}, [bodyInput]);
+	useEffect(
+		() =>
+			titleInput.length > 0
+				? setTitleIsValid(true)
+				: setTitleIsValid(false),
+		[titleInput]
+	);
+	useEffect(
+		() =>
+			bodyInput.length > 0 ? setBodyIsValid(true) : setBodyIsValid(false),
+		[bodyInput]
+	);
 
 	function handleSubmit() {
 		async function submitPost() {
@@ -65,8 +72,6 @@ function NewPost() {
 						placeholder=" "
 						className={styles.input}
 						value={titleInput}
-						onFocus={() => setTitleHasFocus(true)}
-						onBlur={() => setTitleHasFocus(false)}
 						onChange={(e) => setTitleInput(e.target.value)}
 					/>
 					<label htmlFor="title">Title</label>
