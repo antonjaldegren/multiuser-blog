@@ -41,21 +41,23 @@ function Login() {
 					<input
 						type="text"
 						id="username"
+						placeholder=" "
 						className={styles.input}
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
-					<label htmlFor="username">Username:</label>
+					<label htmlFor="username">Username</label>
 				</div>
 				<div className={styles.inputGroup}>
 					<input
 						type="password"
 						id="password"
+						placeholder=" "
 						className={styles.input}
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<label htmlFor="password">Password:</label>
+					<label htmlFor="password">Password</label>
 				</div>
 				<div className={styles.buttonContainer}>
 					<div className={styles.registerContainer}>
