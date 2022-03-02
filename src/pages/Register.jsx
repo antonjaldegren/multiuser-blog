@@ -147,7 +147,7 @@ function Register() {
 						passwordHasFocus &&
 						passwordInput.length > 0 && (
 							<p className={styles.warning}>
-								Password must be at least 6 characters
+								Password must be between 6 and 20 characters
 							</p>
 						)}
 				</div>
