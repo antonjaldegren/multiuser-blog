@@ -1,0 +1,14 @@
+.wrapper {
+	background: rgb(233, 233, 233);
+	padding: 1em 1em 1em 2em;
+	border-left: 15px solid rgb(170, 170, 170);
+	margin-top: 1em;
+}
+
+.wrapper:hover {
+	background-color: rgb(204, 204, 204);
+}
+
+.author {
+	font-style: italic;
+}

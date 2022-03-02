@@ -1,0 +1,12 @@
+.image {
+	max-width: 80%;
+}
+
+.title {
+	border-left: 10px solid black;
+	padding-left: 0.5em;
+}
+
+.author {
+	font-style: italic;
+}
