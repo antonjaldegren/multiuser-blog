@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-
+import styles from "./Login.module.css";
 import authState from "../recoil/auth/atom";
 
 // Register: https://cme-blog.osuka.dev/api/auth/local/register
@@ -35,27 +35,46 @@ function Login() {
 	return (
 		<div>
 			<Helmet>
-				<title>My Blog | Login</title>
+				<title>Blog | Login</title>
 			</Helmet>
-			<h1>Login</h1>
-			<Link to="/register">
-				<button>REGISTER</button>
-			</Link>
-			<label htmlFor="username">Username:</label>
-			<input
-				type="text"
-				id="username"
-				value={username}
-				onChange={(e) => setUsername(e.target.value)}
-			/>
-			<label htmlFor="password">Password:</label>
-			<input
-				type="password"
-				id="password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-			/>
-			<button onClick={handleClick}>LOGIN</button>
+			<h1 className={styles.title}>Login</h1>
+			<section className={styles.form}>
+				<div className={styles.inputGroup}>
+					<input
+						type="text"
+						id="username"
+						className={styles.input}
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+					<label htmlFor="username">Username:</label>
+				</div>
+				<div className={styles.inputGroup}>
+					<input
+						type="password"
+						id="password"
+						className={styles.input}
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					<label htmlFor="password">Password:</label>
+				</div>
+				<div className={styles.buttonContainer}>
+					<div className={styles.registerContainer}>
+						<Link to="/register">
+							<button className={styles.registerButton}>
+								REGISTER
+							</button>
+						</Link>
+					</div>
+					<button
+						className={styles.loginButton}
+						onClick={handleClick}
+					>
+						LOGIN
+					</button>
+				</div>
+			</section>
 		</div>
 	);
 }

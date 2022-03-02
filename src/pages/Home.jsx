@@ -13,7 +13,7 @@ function Home() {
 	return (
 		<div className={styles.home}>
 			<Helmet>
-				<title>Blog</title>
+				<title>Blog | Home</title>
 			</Helmet>
 			<header className={styles.header}>
 				<div className={styles["header-container"]}>

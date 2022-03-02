@@ -89,23 +89,45 @@
 	right: 0;
 }
 
-.button {
+.buttonContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1em;
+}
+
+.loginButton,
+.registerButton {
 	font-family: inherit;
 	text-transform: uppercase;
 	letter-spacing: 0.1rem;
-	color: white;
-	background-color: var(--clr-lgt-blue);
 	padding: 1em;
-	border: none;
 	border-radius: 2em;
-	width: 45%;
 	align-self: center;
+	cursor: pointer;
 }
 
-.button:disabled {
+.loginButton {
+	color: white;
+	background-color: var(--clr-lgt-blue);
+	border: none;
+}
+
+.registerButton {
+	width: 100%;
+	color: var(--clr-lgt-blue);
+	background-color: white;
+	border: 1px solid var(--clr-lgt-blue);
+}
+
+.loginButton:disabled {
 	cursor: not-allowed;
 }
 
-.button:not(:disabled):hover {
+.loginButton:not(:disabled):hover {
 	background-color: var(--clr-drk-blue);
+}
+
+.registerButton:not(:disabled):hover {
+	color: var(--clr-drk-blue);
+	border: 1px solid var(--clr-drk-blue);
 }

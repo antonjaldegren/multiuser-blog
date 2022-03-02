@@ -153,7 +153,7 @@ function Register() {
 				</div>
 				<button
 					onClick={handleSubmit}
-					className={styles.login}
+					className={styles.button}
 					disabled={
 						!(usernameIsValid && emailIsValid && passwordIsValid)
 					}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import styles from "./Post.module.css";
@@ -25,6 +26,9 @@ function Post() {
 
 	return (
 		<div>
+			<Helmet>
+				<title>Blog | {post.title}</title>
+			</Helmet>
 			{post.image.data ? (
 				<img
 					className={styles.image}
