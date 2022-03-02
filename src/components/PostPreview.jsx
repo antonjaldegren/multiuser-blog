@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
 import styles from "./PostPreview.module.css";
 
 function PostPreview({ post }) {
+	const date = dayjs(post.attributes.createdAt).format("D MMM YYYY | HH:mm");
+	console.log(date);
 	return (
 		<section className={styles.post}>
 			<Link to={`/post/${post.id}`}>
 				<div className={styles.wrapper}>
 					<h2>{post.attributes.title}</h2>
-					<small>Published at {post.attributes.createdAt}</small>
+					<small>{date}</small>
 					<p>
 						Written by{" "}
 						<span className={styles.author}>

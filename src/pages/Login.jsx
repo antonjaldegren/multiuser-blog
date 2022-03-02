@@ -7,24 +7,56 @@ import styles from "./Login.module.css";
 import authState from "../recoil/auth/atom";
 
 function Login() {
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
+	const [usernameInput, setUsernameInput] = useState("");
+	const [usernameIsValid, setUsernameIsValid] = useState(false);
+
+	const [passwordInput, setPassword] = useState("");
+	const [passwordIsValid, setPasswordIsValid] = useState(false);
+
+	const [loginHasFailed, setLoginHasFailed] = useState(false);
+
 	const [user, setUser] = useRecoilState(authState);
 	const navigate = useNavigate();
 
 	useEffect(() => user.token && navigate("/"), [user.token, navigate]);
 
+	useEffect(
+		() =>
+			usernameInput.length > 0
+				? setUsernameIsValid(true)
+				: setUsernameIsValid(false),
+		[usernameInput, setUsernameIsValid]
+	);
+
+	useEffect(
+		() =>
+			passwordInput.length > 0
+				? setPasswordIsValid(true)
+				: setPasswordIsValid(false),
+		[passwordInput, setUsernameIsValid]
+	);
+
 	function handleClick() {
 		async function login() {
-			const { data } = await axios.post(
-				"https://cme-blog.osuka.dev/api/auth/local",
-				{
-					identifier: username,
-					password: password,
-				}
-			);
-			setUser({ username: data.user.username, token: data.jwt });
-			navigate("/");
+			try {
+				const response = await axios.post(
+					"https://cme-blog.osuka.dev/api/auth/local",
+					{
+						identifier: usernameInput,
+						password: passwordInput,
+					}
+				);
+
+				console.log("try");
+
+				setUser({
+					username: response.data.user.username,
+					token: response.data.jwt,
+				});
+				navigate("/");
+			} catch (err) {
+				setLoginHasFailed(true);
+			}
 		}
 
 		login();
@@ -43,8 +75,8 @@ function Login() {
 						id="username"
 						placeholder=" "
 						className={styles.input}
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
+						value={usernameInput}
+						onChange={(e) => setUsernameInput(e.target.value)}
 					/>
 					<label htmlFor="username">Username</label>
 				</div>
@@ -54,11 +86,16 @@ function Login() {
 						id="password"
 						placeholder=" "
 						className={styles.input}
-						value={password}
+						value={passwordInput}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<label htmlFor="password">Password</label>
 				</div>
+				{loginHasFailed && (
+					<small className={styles.failedLogin}>
+						Username or password is wrong!
+					</small>
+				)}
 				<div className={styles.buttonContainer}>
 					<div className={styles.registerContainer}>
 						<Link to="/register">
@@ -70,6 +107,7 @@ function Login() {
 					<button
 						className={styles.loginButton}
 						onClick={handleClick}
+						disabled={!(usernameIsValid && passwordIsValid)}
 					>
 						LOGIN
 					</button>

@@ -1,6 +1,8 @@
 :root {
 	--clr-lgt-blue: rgb(76, 139, 245);
 	--clr-drk-blue: rgb(41, 115, 243);
+	--clr-lgt-red: rgb(255, 201, 201);
+	--clr-drk-red: rgb(255, 77, 77);
 }
 
 * {

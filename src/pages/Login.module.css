@@ -3,12 +3,13 @@
 }
 
 .form {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	max-width: 400px;
 	margin: 2em auto;
 	padding: 2em 1.5em;
-	gap: 2em;
+	gap: 2.5em;
 	border: 1px solid rgb(219, 219, 219);
 	box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, 0.041);
 }
@@ -66,29 +67,6 @@
 	color: var(--clr-lgt-blue);
 }
 
-.invalid .input:not(:placeholder-shown) ~ label {
-	color: rgb(255, 74, 74);
-}
-
-.valid .input:not(:placeholder-shown):focus ~ label {
-	color: rgb(83, 185, 83);
-}
-
-.check {
-	position: absolute;
-	width: 1.2rem;
-	height: 100%;
-	right: 1rem;
-}
-
-.warning {
-	position: absolute;
-	color: rgb(255, 74, 74);
-	font-size: 0.7rem;
-	top: 4.1em;
-	right: 0;
-}
-
 .buttonContainer {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -130,4 +108,11 @@
 .registerButton:not(:disabled):hover {
 	color: var(--clr-drk-blue);
 	border: 1px solid var(--clr-drk-blue);
+}
+
+.failedLogin {
+	position: absolute;
+	bottom: 7em;
+	right: 2em;
+	color: var(--clr-drk-red);
 }
