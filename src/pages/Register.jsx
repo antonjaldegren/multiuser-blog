@@ -21,7 +21,7 @@ function Register() {
 
 	useEffect(
 		() =>
-			usernameInput.length >= 6 && usernameInput.length <= 20
+			usernameInput.length >= 4 && usernameInput.length <= 20
 				? setUsernameIsValid(true)
 				: setUsernameIsValid(false),
 		[usernameInput]
@@ -63,7 +63,7 @@ function Register() {
 	return (
 		<>
 			<h1 className={styles.title}>Register new user</h1>
-			<section className={styles.form}>
+			<form className={styles.form}>
 				<div
 					className={`${styles.inputGroup} ${
 						usernameIsValid
@@ -89,7 +89,7 @@ function Register() {
 						usernameHasFocus &&
 						usernameInput.length > 0 && (
 							<p className={styles.warning}>
-								Username must be between 6 and 20 characters
+								Username must be between 4 and 20 characters
 							</p>
 						)}
 				</div>
@@ -108,7 +108,10 @@ function Register() {
 						value={emailInput}
 						onFocus={() => setEmailHasFocus(true)}
 						onBlur={() => setEmailHasFocus(false)}
-						onChange={(e) => setEmailInput(e.target.value)}
+						onChange={(e) => {
+							e.preventDefault();
+							setEmailInput(e.target.value);
+						}}
 					/>
 					<label htmlFor="email">Email</label>
 					{emailIsValid && (
@@ -160,7 +163,7 @@ function Register() {
 				>
 					Register
 				</button>
-			</section>
+			</form>
 		</>
 	);
 }

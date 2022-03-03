@@ -11,8 +11,8 @@ function NotFound() {
 				<title>Blog | Not found</title>
 			</Helmet>
 			Page not found!{" "}
-			<span className={styles.link} onClick={() => navigate(-1)}>
-				Press here to go back.
+			<span className={styles.link} onClick={() => navigate("/")}>
+				Press here to go home.
 			</span>
 		</div>
 	);

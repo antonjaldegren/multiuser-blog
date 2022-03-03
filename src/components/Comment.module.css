@@ -1,0 +1,19 @@
+.comment {
+	background-color: var(--clr-lgt-grey);
+	border-left: 10px solid var(--clr-drk-grey);
+	padding: 1em;
+	box-shadow: var(--box-shadow);
+	margin-top: 1em;
+}
+
+.author {
+	margin: 0;
+}
+
+.date {
+	color: var(--clr-darkest-grey);
+}
+
+.content {
+	margin-bottom: 0;
+}

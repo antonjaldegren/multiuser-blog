@@ -8,10 +8,8 @@ import authState from "../recoil/auth/atom";
 
 function Login() {
 	const [usernameInput, setUsernameInput] = useState("");
-	const [usernameIsValid, setUsernameIsValid] = useState(false);
-
 	const [passwordInput, setPassword] = useState("");
-	const [passwordIsValid, setPasswordIsValid] = useState(false);
+	const [credentialsAreValid, setCredentialsAreValid] = useState(false);
 
 	const [loginHasFailed, setLoginHasFailed] = useState(false);
 
@@ -22,18 +20,10 @@ function Login() {
 
 	useEffect(
 		() =>
-			usernameInput.length > 0
-				? setUsernameIsValid(true)
-				: setUsernameIsValid(false),
-		[usernameInput, setUsernameIsValid]
-	);
-
-	useEffect(
-		() =>
-			passwordInput.length > 0
-				? setPasswordIsValid(true)
-				: setPasswordIsValid(false),
-		[passwordInput, setUsernameIsValid]
+			usernameInput.length > 0 && passwordInput.length > 0
+				? setCredentialsAreValid(true)
+				: setCredentialsAreValid(false),
+		[usernameInput, passwordInput, setCredentialsAreValid]
 	);
 
 	function handleClick() {
@@ -46,9 +36,6 @@ function Login() {
 						password: passwordInput,
 					}
 				);
-
-				console.log("try");
-
 				setUser({
 					username: response.data.user.username,
 					token: response.data.jwt,
@@ -107,7 +94,7 @@ function Login() {
 					<button
 						className={styles.loginButton}
 						onClick={handleClick}
-						disabled={!(usernameIsValid && passwordIsValid)}
+						disabled={!credentialsAreValid}
 					>
 						LOGIN
 					</button>

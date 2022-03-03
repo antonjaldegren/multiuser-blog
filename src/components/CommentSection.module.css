@@ -1,0 +1,9 @@
+.commentSection {
+	background-color: var(--clr-lgt-grey);
+	padding: 1em;
+	margin-top: 1em;
+}
+
+.title {
+	margin: 0;
+}

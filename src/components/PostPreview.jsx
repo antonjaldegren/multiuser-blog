@@ -5,7 +5,7 @@ import styles from "./PostPreview.module.css";
 
 function PostPreview({ post }) {
 	const date = dayjs(post.attributes.createdAt).format("D MMM YYYY | HH:mm");
-	console.log(date);
+
 	return (
 		<section className={styles.post}>
 			<Link to={`/post/${post.id}`}>

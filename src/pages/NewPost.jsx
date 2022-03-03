@@ -2,67 +2,46 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import axios from "axios";
+import MDEditor from "@uiw/react-md-editor";
+
+import { submitPost } from "../api";
 import authState from "../recoil/auth/atom";
 import styles from "./NewPost.module.css";
 
 function NewPost() {
 	const [titleInput, setTitleInput] = useState("");
-	const [titleIsValid, setTitleIsValid] = useState(false);
-
 	const [bodyInput, setBodyInput] = useState("");
-	const [bodyIsValid, setBodyIsValid] = useState(false);
+	const [error, setError] = useState(false);
 
 	const user = useRecoilValue(authState);
 	const navigate = useNavigate();
 
 	useEffect(() => !user.token && navigate("/"), [user.token, navigate]);
 
-	useEffect(
-		() =>
-			titleInput.length > 0
-				? setTitleIsValid(true)
-				: setTitleIsValid(false),
-		[titleInput]
-	);
-	useEffect(
-		() =>
-			bodyInput.length > 0 ? setBodyIsValid(true) : setBodyIsValid(false),
-		[bodyInput]
-	);
+	async function handleSubmit() {
+		const response = await submitPost(
+			{
+				title: titleInput,
+				content: bodyInput,
+				author: user.username,
+			},
+			user.token
+		);
 
-	function handleSubmit() {
-		async function submitPost() {
-			const res = await axios.post(
-				"https://cme-blog.osuka.dev/api/posts",
-				{
-					data: {
-						title: titleInput,
-						content: bodyInput,
-						author: user.username,
-					},
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${user.token}`,
-					},
-				}
-			);
-
-			console.log(res);
-
-			navigate(`/post/${res.data.data.id}`);
+		if (response === "error") {
+			setError(true);
+			return;
 		}
 
-		submitPost();
+		navigate(`/post/${response.data.data.id}`);
 	}
 
 	return (
 		<div>
 			<Helmet>
-				<title>Blog | New Post</title>
+				<title>Blog | New post</title>
 			</Helmet>
-			<h1 className={styles.title}>New Post</h1>
+			<h1 className={styles.title}>New post</h1>
 
 			<section className={styles.form}>
 				<div className={styles.inputGroup}>
@@ -77,24 +56,23 @@ function NewPost() {
 					<label htmlFor="title">Title</label>
 				</div>
 				<div className={styles.inputGroup}>
-					<textarea
-						id="body"
-						cols="30"
-						rows="10"
-						placeholder=" "
-						className={styles.input}
+					<MDEditor
 						value={bodyInput}
-						onChange={(e) => setBodyInput(e.target.value)}
-					></textarea>
-					<label htmlFor="body">Body</label>
+						onChange={setBodyInput}
+					></MDEditor>
 				</div>
 				<button
 					onClick={handleSubmit}
 					className={styles.button}
-					disabled={!(titleIsValid && bodyIsValid)}
+					disabled={!(titleInput.length > 0 && bodyInput.length > 0)}
 				>
 					SUBMIT
 				</button>
+				{error && (
+					<div className={styles.error}>
+						Sorry, something went wrong! Try again later.
+					</div>
+				)}
 			</section>
 		</div>
 	);

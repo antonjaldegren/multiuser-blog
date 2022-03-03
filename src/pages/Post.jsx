@@ -1,49 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
-import axios from "axios";
+import { getPost } from "../api";
+import dayjs from "dayjs";
+
 import styles from "./Post.module.css";
+import CommentSection from "../components/CommentSection";
 import Loader from "../components/Loader";
 
 function Post() {
 	const [post, setPost] = useState(null);
-	const params = useParams();
+	const { id } = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		async function getPost() {
-			const res = await axios.get(
-				`https://cme-blog.osuka.dev/api/posts/${params.id}?populate=%2A`
-			);
-			setPost(res.data.data.attributes);
-			console.log(res.data.data);
+		async function callGetPost() {
+			const response = await getPost(id);
+			if (response === "error") {
+				navigate("/notfound");
+				return;
+			}
+			setPost(response.data.data.attributes);
 		}
-
-		getPost();
-	}, [params.id]);
+		callGetPost();
+	}, [id]);
 
 	if (!post) return <Loader />;
 
 	return (
-		<div>
+		<>
 			<Helmet>
 				<title>Blog | {post.title}</title>
 			</Helmet>
-			{post.image.data ? (
-				<img
-					className={styles.image}
-					src={`https://cme-blog.osuka.dev${post.image.data.attributes.url}`}
-					alt="Post"
-				/>
-			) : null}
-			<h1 className={styles.title}>{post.title}</h1>
-			<small>
-				By <span className={styles.author}>{post.author}</span>
-			</small>
-			<div>
+			<div className={styles.post}>
+				{post.image.data ? (
+					<img
+						className={styles.image}
+						src={`https://cme-blog.osuka.dev${post.image.data.attributes.url}`}
+						alt="Post"
+					/>
+				) : null}
+				<h1 className={styles.title}>{post.title}</h1>
+				<div className={styles.meta}>
+					<small>
+						Writted by{" "}
+						<span className={styles.author}>{post.author}</span>
+					</small>
+					<small>
+						{dayjs(post.createdAt).format("D MMM YYYY | HH:mm")}
+					</small>
+				</div>
 				<ReactMarkdown>{post.content}</ReactMarkdown>
 			</div>
-		</div>
+			<CommentSection />
+		</>
 	);
 }
 

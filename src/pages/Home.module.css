@@ -23,7 +23,7 @@
 	background: rgb(255, 139, 135);
 	color: white;
 	padding: 0.5em 1em;
-	transform: skewX(-15deg) translateX(10px);
+	transform: skewX(-15deg) translateX(8px);
 }
 
 .first-letter {

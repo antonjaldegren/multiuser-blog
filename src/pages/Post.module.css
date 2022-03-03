@@ -1,10 +1,17 @@
+.post {
+	background: var(--clr-lgt-grey);
+	padding: 1em;
+}
+
 .image {
 	max-width: 80%;
 }
 
-.title {
-	border-left: 10px solid black;
-	padding-left: 0.5em;
+.meta {
+	display: flex;
+	flex-direction: column;
+	color: var(--clr-darkest-grey);
+	gap: 0.3em;
 }
 
 .author {
