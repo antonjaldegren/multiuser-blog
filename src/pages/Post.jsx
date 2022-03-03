@@ -24,7 +24,7 @@ function Post() {
 			setPost(response.data.data.attributes);
 		}
 		callGetPost();
-	}, [id]);
+	}, [id, navigate]);
 
 	if (!post) return <Loader />;
 
