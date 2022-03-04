@@ -82,11 +82,13 @@
 }
 
 .warning {
-	position: absolute;
 	color: rgb(255, 74, 74);
 	font-size: 0.7rem;
-	top: 4.1em;
-	right: 0;
+	margin: 0.8em 0 0 0;
+}
+
+.strengthIndicatorContainer {
+	position: relative;
 }
 
 .button {

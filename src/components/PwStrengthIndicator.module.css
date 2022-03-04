@@ -1,0 +1,35 @@
+.container {
+	background: var(--clr-lgt-grey);
+	margin-top: 0.5em;
+}
+
+.container,
+.bar {
+	border-radius: 1em;
+}
+
+.bar {
+	padding: 0.2em 0 0.2em 0.7em;
+	transition: all 0.2s;
+	font-size: 0.8rem;
+}
+
+.strong {
+	background: var(--clr-green);
+	width: 100%;
+}
+
+.medium {
+	background: rgb(255, 187, 0);
+	width: 66.67%;
+}
+
+.weak {
+	background: var(--clr-drk-red);
+	width: 33.33%;
+}
+
+.strength {
+	color: white;
+	text-transform: uppercase;
+}
