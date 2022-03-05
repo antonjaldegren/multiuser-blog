@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 import check from "../check.svg";
 import styles from "./Register.module.css";
@@ -62,6 +63,9 @@ function Register() {
 
 	return (
 		<>
+			<Helmet>
+				<title>Blog | Register</title>
+			</Helmet>
 			<h1 className={styles.title}>Register new user</h1>
 			<form className={styles.form}>
 				<div
