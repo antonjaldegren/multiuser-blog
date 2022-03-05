@@ -1,6 +1,6 @@
 # multiuser-blog
 
-Deployed at: https://antonjaldegren-blog.netlify.app/
+Deployed at: https://antonjaldegren-blog.netlify.app/ \
 Simple blog made for educational purposes. Features include ability to create an account, log in and submit posts.
 
 # Getting Started with Create React App
